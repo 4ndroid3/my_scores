@@ -1,0 +1,13 @@
+# Base
+Pillow
+psycopg2-binary>=2.8
+
+
+# Django
+Django
+django-extensions
+
+# Django REST Framework
+djangorestframework
+django-filter==2.4.0
+
