@@ -1,10 +1,11 @@
+""" URLS de books"""
 # Django Imports
 from django.urls import path
 
 # App Imports
-from . import views
+from .views import BookView
 
 urlpatterns = [
-    path('', views.books, name="productos"),
+    path('', BookView.as_view()),
 ]
 

@@ -56,6 +56,10 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.users)
     
+    class Meta:
+        verbose_name = 'Perfil'
+        verbose_name_plural = 'Perfiles'
+    
 
 class Paises(models.Model):
     """Paises del mundo para agregar en el perfil de usuario
