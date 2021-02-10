@@ -10,8 +10,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('users/', include('users.urls')),
-    path('books/', include('books.urls')),
+    path('', include('users.urls')),
+    path('', include('books.urls')),
 ]
 
 

@@ -40,7 +40,6 @@ class Book(models.Model):
     )
 
     año_publicacion = models.PositiveIntegerField(
-        max_length = 4,
         help_text = 'Año en que se publico el libro.',
         blank = True,
         null=True,
