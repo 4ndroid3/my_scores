@@ -1,12 +1,14 @@
 # Project Imports
 from users.models.users import User
+from users.models.profile import Profile
 
 # Django Imports.
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, password_validation
 
 # Rest framework imports
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
+from rest_framework.validators import UniqueValidator
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,6 +23,43 @@ class UserSerializer(serializers.ModelSerializer):
             'is_active', 
             'date_joined',
         )
+class UserSignUpSerializer(serializers.Serializer):
+    """ Serializer para el registro de usuarios """
+
+    email = serializers.EmailField(
+        validators = [UniqueValidator(queryset = User.objects.all())]
+    )
+    username = serializers.CharField(
+        min_length = 4,
+        max_length = 20,
+        validators = [UniqueValidator(queryset = User.objects.all())]
+    )
+
+    # Password
+    password = serializers.CharField(min_length = 8, max_length = 20)
+    password_confirmation = serializers.CharField(min_length = 8, max_length = 20)
+
+    # Nombres
+    first_name = serializers.CharField(min_length = 2, max_length = 30)
+    last_name = serializers.CharField(min_length = 2, max_length = 30)
+
+    #fecha_nacimiento = serializers.DateField()
+
+    def validate(self, data):
+        """ controla si la contraseña ingresada es correcta """
+        password = data['password']
+        password_conf = data['password_confirmation']
+        if password != password_conf:
+            raise serializers.ValidationError('Las contraseñas no coinciden')
+        password_validation.validate_password(password)
+        return data
+    def create(self, data):
+        """ Crea usuarios y perfil """
+        data.pop('password_confirmation') # Lo borro porque acá ya no me sirve
+        user = User.objects.create_user(**data)
+        profile = Profile.objects.create(users = user)
+        return user
+
 
 class UserLoginSerializer(serializers.Serializer):
     """Serializer para realizar Login de Usuario """
