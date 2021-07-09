@@ -11,3 +11,4 @@ Una vez iniciado el proyecto, hay que cargar el archivo CSV con la lista de los 
 Se debe ejecutar el archivo importar_paises.py que está en la carpeta principal del proyecto.
 
 Cada usuario tiene un Perfil, con datos personales que complementan al Usuario.
+
