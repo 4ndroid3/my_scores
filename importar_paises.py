@@ -5,7 +5,7 @@ from users.models.profile import Paises
 with open('paises.csv') as csvfile:
 	reader = csv.DictReader(csvfile)
 	for row in reader:
-		print(str(row['nombre']))
+		print(row['nombre'])
 		pais = Paises()
-		pais.nombrePais = str(row['nombre'])
+		pais.nombrePais = row['nombre']
 		pais.save()

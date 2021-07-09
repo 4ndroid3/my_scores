@@ -1,6 +1,9 @@
 # Django Imports
 from django.db import models
 
+# Project Imports
+from books.models import Book
+
 class Profile(models.Model):
     """Profile Model.
 
@@ -59,6 +62,40 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Perfil'
         verbose_name_plural = 'Perfiles'
+
+
+class Readed_Books(models.Model):
+    """ Registro de los libros que va leyendo
+    el usuario 
+    Campos:
+    - id_profile
+    - id_book
+    - readed_date
+    - review"""
+
+    id_profile = models.ForeignKey(
+        Profile, 
+        on_delete = models.CASCADE, 
+        verbose_name = 'Usuario',
+        help_text = 'Usuario que leyo el libro',
+    )
+
+    id_book = models.ForeignKey(
+        'books.Book', 
+        on_delete=models.CASCADE,
+        verbose_name = 'Libro',
+        help_text = 'Libro leido por el usuario',
+    )
+
+    readed_date = models.DateField(
+        verbose_name = 'Fecha',
+        help_text = 'Fecha en la que se leyo el libro',
+    )
+
+    review = models.TextField(
+        verbose_name = 'Review',
+        help_text = 'Reseña del libro leido',
+    )
     
 
 class Paises(models.Model):
