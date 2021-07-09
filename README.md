@@ -12,3 +12,5 @@ Se debe ejecutar el archivo importar_paises.py que está en la carpeta principal
 
 Cada usuario tiene un Perfil, con datos personales que complementan al Usuario.
 
+## Diseño de Base de Datos
+![drawSQL-export-2021-07-09_16_20](https://user-images.githubusercontent.com/35976464/125126673-d1f1bf00-e0d1-11eb-8ad8-72a13a538eb0.png)
