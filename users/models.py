@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 from books.models import Book
 
+
 class User(AbstractUser):
     """User Model Modificado
     Se extiende de la clase AbstractUser para agregar nuevas funcionalidades
@@ -90,7 +91,6 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Perfil'
         verbose_name_plural = 'Perfiles'
-
 
 
 class User_Book(models.Model):

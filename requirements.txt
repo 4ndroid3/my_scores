@@ -14,3 +14,6 @@ django-filter==2.4.0
 
 # Debug
 flake8==3.9.0
+
+# JWT
+djangorestframework_simplejwt==4.7.2
