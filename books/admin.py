@@ -9,8 +9,6 @@ from books.models import Book
 
 
 class CustomBookAdmin(admin.ModelAdmin):
-    list_display = ('user','titulo', 'autor', 'fecha_leido',)
-    list_filter = ('user', 'titulo', 'autor', 'año_publicacion',)
-    search_fields = ('user', 'titulo', 'autor',)
+    list_display = ('titulo', 'autor', 'año_publicacion',)
 
 admin.site.register(Book, CustomBookAdmin)

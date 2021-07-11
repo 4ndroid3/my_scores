@@ -1,13 +1,14 @@
 # Project imports
-from users.models.users import User
+from users.models import User, Profile, User_Book
 
 # Serializers
-from users.serializers.users import (
+from users.serializers import (
     UserSerializer, 
     UserLoginSerializer, 
-    UserSignUpSerializer
+    UserSignUpSerializer,
+    ProfileSerializer,
+    UserBookSerializer
 )
-
 
 # Django Imports
 
@@ -16,6 +17,7 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
+
 
 class UserView(generics.ListCreateAPIView):
     """ View general del User"""
@@ -38,6 +40,7 @@ class UserLoginAPIView(APIView):
 
         return Response(data, status = status.HTTP_201_CREATED)
 
+
 class UserSignUpAPIView(APIView):
     """ Signup de usuario con APIview"""
     
@@ -49,3 +52,15 @@ class UserSignUpAPIView(APIView):
         data = UserSerializer(user).data
 
         return Response(data, status = status.HTTP_201_CREATED)
+
+
+class ProfileView(generics.ListCreateAPIView):
+    """ View general del Profile"""
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+
+class ReadedBooks(generics.ListCreateAPIView):
+    """ View general del Profile"""
+    queryset = User_Book.objects.all()
+    serializer_class = UserBookSerializer

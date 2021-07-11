@@ -1,6 +1,5 @@
 # Project Imports
-from users.models.users import User
-from users.models.profile import Profile
+from users.models import User, Profile, User_Book
 
 # Django Imports.
 from django.contrib.auth import authenticate, password_validation
@@ -9,6 +8,7 @@ from django.contrib.auth import authenticate, password_validation
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from rest_framework.validators import UniqueValidator
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,6 +23,8 @@ class UserSerializer(serializers.ModelSerializer):
             'is_active', 
             'date_joined',
         )
+
+
 class UserSignUpSerializer(serializers.Serializer):
     """ Serializer para el registro de usuarios """
 
@@ -82,3 +84,29 @@ class UserLoginSerializer(serializers.Serializer):
     def create(self, data):
         token, created = Token.objects.get_or_create(user = self.context['user'])
         return self.context['user'], token.key
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = (
+            'users',
+            'biography', 
+            'fecha_nacimiento', 
+            'user_img', 
+            'pais', 
+            'libros_leidos', 
+            'auth_leidos',
+        )
+
+
+class UserBookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User_Book
+        fields = (
+            'id_profile',
+            'id_book', 
+            'fecha_leido', 
+            'año_edicion', 
+            'reseña',
+        )

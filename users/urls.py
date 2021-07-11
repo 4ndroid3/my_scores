@@ -4,16 +4,18 @@
 from django.urls import path
 
 # Django Imports
-from .views.profile import ProfileView
-from .views.users import (
+from .views import (
     UserView, 
     UserLoginAPIView, 
-    UserSignUpAPIView
+    UserSignUpAPIView,
+    ProfileView,
+    ReadedBooks,
     )
 
 urlpatterns = [
-    path('users/', UserView.as_view(), name = 'users'),
-    path('users/login/', UserLoginAPIView.as_view(), name = 'login'),
-    path('users/signup/', UserSignUpAPIView.as_view(), name = 'signup'),
-    path('users/profile/', ProfileView.as_view(), name = 'profile'),
+    path('', UserView.as_view(), name = 'users'),
+    path('login/', UserLoginAPIView.as_view(), name = 'login'),
+    path('signup/', UserSignUpAPIView.as_view(), name = 'signup'),
+    path('profile/', ProfileView.as_view(), name = 'profile'),
+    path('profile/books/', ReadedBooks.as_view(), name = 'readed'),
 ]

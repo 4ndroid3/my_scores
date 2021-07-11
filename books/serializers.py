@@ -8,12 +8,10 @@ class BookSerializer(serializers.ModelSerializer):
     """Serializer del model Book."""
     class Meta:
         model = Book
-        fields = (
-            'user', 
+        fields = ( 
             'titulo', 
             'autor', 
             'año_publicacion', 
             'cant_hojas', 
-            'fecha_leido', 
-            'reseña',
+            'img_cover',
         )
