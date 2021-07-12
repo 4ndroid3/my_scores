@@ -17,5 +17,5 @@ urlpatterns = [
     path('login/', UserLoginAPIView.as_view(), name = 'login'),
     path('signup/', UserSignUpAPIView.as_view(), name = 'signup'),
     path('profile/', ProfileView.as_view(), name = 'profile'),
-    path('profile/books/', ReadedBooks.as_view(), name = 'readed'),
+    path('books/', ReadedBooks.as_view(), name = 'readed'),
 ]
