@@ -1,4 +1,4 @@
-# my_scores
+# MyScores
 Proyecto personal con Django, Django REST framework, donde se podrá cargar los libros leidos y luego hacer estadisticas y seguimientos a lo largo del tiempo.
 
 El proyecto tiene su correspondiente docker-file.yml con el cual se ejecutan sus dependencias y se puede configurar el proyecto.
