@@ -94,7 +94,6 @@ class ProfileSerializer(serializers.ModelSerializer):
             'biography', 
             'fecha_nacimiento', 
             'user_img', 
-            'pais', 
             'libros_leidos', 
             'auth_leidos',
         )

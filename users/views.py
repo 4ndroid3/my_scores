@@ -13,13 +13,13 @@ from users.serializers import (
 # Django Imports
 
 # Django REST framework Imports
-from rest_framework import generics
+from rest_framework.generics import RetrieveAPIView, ListCreateAPIView
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 
 
-class UserView(generics.ListCreateAPIView):
+class UserView(ListCreateAPIView):
     """ View general del User"""
     queryset = User.objects.filter(is_active = True)
     serializer_class = UserSerializer
@@ -54,13 +54,22 @@ class UserSignUpAPIView(APIView):
         return Response(data, status = status.HTTP_201_CREATED)
 
 
-class ProfileView(generics.ListCreateAPIView):
+class ProfileView(ListCreateAPIView):
+    """ View general del Profile"""
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+class ProfileDetailView(RetrieveAPIView):
     """ View general del Profile"""
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
 
-class ReadedBooks(generics.ListCreateAPIView):
+class ReadedBooks(ListCreateAPIView):
     """ View general del Profile"""
+    queryset = User_Book.objects.all()
+    serializer_class = UserBookSerializer
+
+class ReadedBookDetail(RetrieveAPIView):
     queryset = User_Book.objects.all()
     serializer_class = UserBookSerializer
