@@ -82,8 +82,9 @@ class UserLoginSerializer(serializers.Serializer):
         return data
 
     def create(self, data):
-        token, created = Token.objects.get_or_create(user = self.context['user'])
-        return self.context['user'], token.key
+        super().create(data)
+        # token, created = Token.objects.get_or_create(user = self.context['user'])
+        # return self.context['user'], token.key
 
 
 class ProfileSerializer(serializers.ModelSerializer):
