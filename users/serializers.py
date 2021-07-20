@@ -66,25 +66,24 @@ class UserSignUpSerializer(serializers.Serializer):
 class UserLoginSerializer(serializers.Serializer):
     """Serializer para realizar Login de Usuario """
     
-    email = serializers.EmailField()
-    password = serializers.CharField(min_length = 8, max_length = 64)
+    # email = serializers.EmailField()
+    # password = serializers.CharField(min_length = 8, max_length = 64)
 
-    def validate(self, data):
-        """ Verifica las credenciales ingresadas en el serializer
-        la funcion authenticate importada de django va a comparar los datos de la db
-        vs los datos ingresados. Si estos no son correctos se va a levantar el 
-        ValidationError.
-        """
-        user = authenticate(username = data['email'], password = data['password'])
-        if not user:
-            raise serializers.ValidationError('Credenciales Invalidas')
-        self.context['user'] = user
-        return data
+    # def validate(self, data):
+    #     """ Verifica las credenciales ingresadas en el serializer
+    #     la funcion authenticate importada de django va a comparar los datos de la db
+    #     vs los datos ingresados. Si estos no son correctos se va a levantar el 
+    #     ValidationError.
+    #     """
+    #     user = authenticate(username = data['email'], password = data['password'])
+    #     if not user:
+    #         raise serializers.ValidationError('Credenciales Invalidas')
+    #     self.context['user'] = user
+    #     return data
 
-    def create(self, data):
-        super().create(data)
-        # token, created = Token.objects.get_or_create(user = self.context['user'])
-        # return self.context['user'], token.key
+    # def create(self, data):
+    #     token, created = Token.objects.get_or_create(user = self.context['user'])
+    #     return self.context['user'], token.key
 
 
 class ProfileSerializer(serializers.ModelSerializer):

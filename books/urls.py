@@ -1,11 +1,16 @@
 """ URLS de books"""
 # Django Imports
-from django.urls import path
+from django.urls import path, include
 
 # App Imports
-from .views import BookListCreate, BookDetail
+from .views import BookView
+
+# Django REST Framework Imports
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'books', BookView, basename='book')
 
 urlpatterns = [
-    path('', BookListCreate.as_view(), name = 'books'),
-    path('<pk>/', BookDetail.as_view(), name = 'books'),
+    path('', include(router.urls)),
 ]

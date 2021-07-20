@@ -28,17 +28,17 @@ class UserView(ListCreateAPIView):
 class UserLoginAPIView(APIView):
     """ Login de usuario con APIview"""
     
-    def post(self, request, *args, **kwargs):
-        """Maneja los request HTTP POST"""
-        serializer = UserLoginSerializer(data = request.data)
-        serializer.is_valid(raise_exception = True)
-        user, token= serializer.save()
-        data = {
-            'user': UserSerializer(user).data,
-            'access_token': token,
-        }
+    # def post(self, request, *args, **kwargs):
+    #     """Maneja los request HTTP POST"""
+    #     serializer = UserLoginSerializer(data = request.data)
+    #     serializer.is_valid(raise_exception = True)
+    #     user, token= serializer.save()
+    #     data = {
+    #         'user': UserSerializer(user).data,
+    #         'access_token': token,
+    #     }
 
-        return Response(data, status = status.HTTP_201_CREATED)
+    #     return Response(data, status = status.HTTP_201_CREATED)
 
 
 class UserSignUpAPIView(APIView):
