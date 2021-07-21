@@ -1,7 +1,7 @@
 """ URLS de users"""
 
 # Project Imports
-from django.urls import path
+from django.urls import path, include
 
 # Django Imports
 from .views import (
@@ -10,16 +10,19 @@ from .views import (
     UserSignUpAPIView,
     ProfileView,
     ReadedBooks,
-    ReadedBookDetail,
-    ProfileDetailView
     )
 
+# Django REST Framework Imports
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'profiles', ProfileView, basename='profiles')
+router.register(r'books', ReadedBooks, basename='readed')
+router.register(r'', UserView, basename='users')
+
+
 urlpatterns = [
-    path('', UserView.as_view(), name = 'users'),
+    path('', include(router.urls)),
     path('login/', UserLoginAPIView.as_view(), name = 'login'),
     path('signup/', UserSignUpAPIView.as_view(), name = 'signup'),
-    path('profile/', ProfileView.as_view(), name = 'profile'),
-    path('profile/<pk>/', ProfileDetailView.as_view(), name = 'profile'),
-    path('books/', ReadedBooks.as_view(), name = 'readed'),
-    path('books/<pk>/', ReadedBookDetail.as_view(), name='readed_detail')
 ]

@@ -17,9 +17,17 @@ from rest_framework.generics import RetrieveAPIView, ListCreateAPIView
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet
+from rest_framework.mixins import (
+    RetrieveModelMixin, 
+    ListModelMixin, 
+    CreateModelMixin, 
+    UpdateModelMixin,
+    DestroyModelMixin
+)
 
 
-class UserView(ListCreateAPIView):
+class UserView(RetrieveModelMixin, GenericViewSet):
     """ View general del User"""
     queryset = User.objects.filter(is_active = True)
     serializer_class = UserSerializer
@@ -54,22 +62,16 @@ class UserSignUpAPIView(APIView):
         return Response(data, status = status.HTTP_201_CREATED)
 
 
-class ProfileView(ListCreateAPIView):
+class ProfileView(RetrieveModelMixin, 
+        ListModelMixin, GenericViewSet):
     """ View general del Profile"""
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
-class ProfileDetailView(RetrieveAPIView):
+class ReadedBooks(
+        RetrieveModelMixin, ListModelMixin, 
+        CreateModelMixin, UpdateModelMixin, 
+        DestroyModelMixin, GenericViewSet):
     """ View general del Profile"""
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
-
-
-class ReadedBooks(ListCreateAPIView):
-    """ View general del Profile"""
-    queryset = User_Book.objects.all()
-    serializer_class = UserBookSerializer
-
-class ReadedBookDetail(RetrieveAPIView):
     queryset = User_Book.objects.all()
     serializer_class = UserBookSerializer
