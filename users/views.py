@@ -25,12 +25,14 @@ from rest_framework.mixins import (
     UpdateModelMixin,
     DestroyModelMixin
 )
+from rest_framework_extensions.mixins import NestedViewSetMixin
 
 
 class UserView(RetrieveModelMixin, GenericViewSet):
     """ View general del User"""
     queryset = User.objects.filter(is_active = True)
     serializer_class = UserSerializer
+    lookup_field = 'username'
 
 
 class UserLoginAPIView(APIView):
@@ -62,13 +64,27 @@ class UserSignUpAPIView(APIView):
         return Response(data, status = status.HTTP_201_CREATED)
 
 
-class ProfileView(RetrieveModelMixin, 
+# class ProfileView(RetrieveModelMixin, 
+#         ListModelMixin, GenericViewSet):
+#     """ View general del Profile"""
+#     queryset = Profile.objects.all()
+#     serializer_class = ProfileSerializer
+
+class ProfileView(NestedViewSetMixin, RetrieveModelMixin, 
         ListModelMixin, GenericViewSet):
     """ View general del Profile"""
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
-class ReadedBooks(
+# class ReadedBooks(
+#         RetrieveModelMixin, ListModelMixin, 
+#         CreateModelMixin, UpdateModelMixin, 
+#         DestroyModelMixin, GenericViewSet):
+#     """ View general del Profile"""
+#     queryset = User_Book.objects.all()
+#     serializer_class = UserBookSerializer
+
+class ReadedBooks(NestedViewSetMixin,
         RetrieveModelMixin, ListModelMixin, 
         CreateModelMixin, UpdateModelMixin, 
         DestroyModelMixin, GenericViewSet):

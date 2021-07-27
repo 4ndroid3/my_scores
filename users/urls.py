@@ -14,12 +14,26 @@ from .views import (
 
 # Django REST Framework Imports
 from rest_framework.routers import DefaultRouter
+from rest_framework_extensions.routers import ExtendedSimpleRouter
 
-router = DefaultRouter()
-router.register(r'profiles', ProfileView, basename='profiles')
-router.register(r'books', ReadedBooks, basename='readed')
-router.register(r'', UserView, basename='users')
+router = ExtendedSimpleRouter()
 
+
+# Nested Routers
+(router.register(r'profiles', 
+                ProfileView, 
+                basename='profiles'
+            )
+        .register(r'books', 
+                ReadedBooks, 
+                basename='profile-readed',
+                parents_query_lookups=['profiles_books']
+            )
+)
+router.register(r'', 
+                UserView, 
+                basename='users'
+            )
 
 urlpatterns = [
     path('', include(router.urls)),
